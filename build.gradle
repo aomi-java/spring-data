@@ -1,24 +1,32 @@
 plugins {
     id "io.franzbecker.gradle-lombok" version "2.2"
-    id "com.jfrog.bintray" version "1.8.5"
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 }
 
 apply from: 'https://onegit.com/enterprise/public/raw/master/libraries.gradle'
+apply from: 'https://onegit.com/enterprise/public/raw/master/spring-libraries.gradle'
 
 allprojects {
     group 'software.sitb.spring.data'
 
     repositories {
         maven { url "${repoUrl}" }
-        jcenter()
+        mavenCentral()
     }
 
 }
 
 subprojects {
-    apply plugin: "com.jfrog.bintray"
+    apply plugin: 'io.spring.dependency-management'
     apply from: 'https://onegit.com/enterprise/public/raw/master/java.gradle'
     apply from: 'https://onegit.com/enterprise/public/raw/master/idea.gradle'
+
+    dependencyManagement {
+        imports {
+            mavenBom 'org.springframework.boot:spring-boot-dependencies:2.4.6'
+            mavenBom 'org.springframework.cloud:spring-cloud-dependencies:2020.0.3'
+        }
+    }
 }
 
 
