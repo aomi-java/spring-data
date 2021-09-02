@@ -1,0 +1,9 @@
+description = 'common'
+
+version '1.0.0-Alpha.0'
+
+apply from: 'https://onegit.com/enterprise/public/raw/master/publishing-with-source.gradle'
+
+dependencies {
+    compileOnly lib.spring_data_commons
+}

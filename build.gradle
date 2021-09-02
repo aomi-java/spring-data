@@ -7,7 +7,7 @@ apply from: 'https://onegit.com/enterprise/public/raw/master/libraries.gradle'
 apply from: 'https://onegit.com/enterprise/public/raw/master/spring-libraries.gradle'
 
 allprojects {
-    group 'software.sitb.spring.data'
+    group 'tech.aomi.spring.data'
 
     repositories {
         maven { url "${repoUrl}" }

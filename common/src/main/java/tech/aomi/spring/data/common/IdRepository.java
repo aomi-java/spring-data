@@ -1,4 +1,4 @@
-package software.sitb.spring.data.mongo.repository;
+package tech.aomi.spring.data.common;
 
 
 /**

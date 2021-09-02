@@ -1,5 +1,0 @@
-description = 'commons'
-
-dependencies {
-    compileOnly lib.spring_data_commons
-}

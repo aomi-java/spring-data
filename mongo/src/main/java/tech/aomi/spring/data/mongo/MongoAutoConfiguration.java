@@ -1,9 +1,8 @@
-package software.sitb.spring.data.mongo;
+package tech.aomi.spring.data.mongo;
 
 import org.bson.types.Decimal128;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,10 +11,10 @@ import org.springframework.data.convert.ReadingConverter;
 import org.springframework.data.convert.WritingConverter;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.convert.MongoCustomConversions;
-import software.sitb.spring.data.mongo.repository.DocumentRepository;
-import software.sitb.spring.data.mongo.repository.DocumentRepositoryImpl;
-import software.sitb.spring.data.mongo.repository.IdRepository;
-import software.sitb.spring.data.mongo.repository.MongodbIdRepository;
+import tech.aomi.spring.data.common.IdRepository;
+import tech.aomi.spring.data.mongo.repository.DocumentRepository;
+import tech.aomi.spring.data.mongo.repository.DocumentRepositoryImpl;
+import tech.aomi.spring.data.mongo.repository.MongodbIdRepository;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package software.sitb.spring.data.mongo.repository;
+package tech.aomi.spring.data.mongo.repository;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
