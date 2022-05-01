@@ -20,7 +20,6 @@ subprojects {
     apply plugin: 'io.spring.dependency-management'
     apply from: 'https://onegit.com/enterprise/public/raw/master/java.gradle'
     apply from: 'https://onegit.com/enterprise/public/raw/master/idea.gradle'
-    apply from: 'https://onegit.com/enterprise/public/raw/master/publish-center.gradle'
 
     dependencyManagement {
         imports {
