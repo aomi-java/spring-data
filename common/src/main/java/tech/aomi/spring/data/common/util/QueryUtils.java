@@ -1,4 +1,4 @@
-package software.sitb.spring.data.commons.utils;
+package tech.aomi.spring.data.common.util;
 
 import org.springframework.data.domain.Sort;
 
