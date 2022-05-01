@@ -1,4 +1,4 @@
-package software.sitb.spring.data.jpa.repository;
+package tech.aomi.spring.data.jpa.repository;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

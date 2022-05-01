@@ -1,4 +1,4 @@
-package software.sitb.spring.data.jpa.repository;
+package tech.aomi.spring.data.jpa.repository;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
