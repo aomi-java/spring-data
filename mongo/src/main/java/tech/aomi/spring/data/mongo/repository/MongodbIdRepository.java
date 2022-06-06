@@ -1,6 +1,7 @@
 package tech.aomi.spring.data.mongo.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -27,6 +28,8 @@ public class MongodbIdRepository implements IdRepository {
     }
 
     private Long generateNoSqlSequence(String sequenceName) {
+        FindAndModifyOptions options = new FindAndModifyOptions();
+        options.returnNew(true);
         DBSequence seq = mongoTemplate.findAndModify(
                 new Query(Criteria.where("id").is(sequenceName)),
                 new Update().inc("value", 1L),
