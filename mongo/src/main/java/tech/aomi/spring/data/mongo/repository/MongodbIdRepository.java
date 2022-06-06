@@ -33,6 +33,7 @@ public class MongodbIdRepository implements IdRepository {
         DBSequence seq = mongoTemplate.findAndModify(
                 new Query(Criteria.where("id").is(sequenceName)),
                 new Update().inc("value", 1L),
+                options,
                 DBSequence.class
         );
         if (null == seq) {
