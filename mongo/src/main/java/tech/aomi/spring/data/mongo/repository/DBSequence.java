@@ -1,5 +1,8 @@
 package tech.aomi.spring.data.mongo.repository;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Document("DBSequence")
 public class DBSequence {
 
     /**
