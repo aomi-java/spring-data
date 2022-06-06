@@ -42,7 +42,8 @@ public interface EntityRepository {
     /**
      * 通过id删除数据
      *
-     * @param id id
+     * @param domainClass 实体class
+     * @param id          id
      */
     void delete(Class<?> domainClass, Object id);
 
@@ -103,17 +104,6 @@ public interface EntityRepository {
     <T> T queryOne(String jpql, Map<String, Object> params);
 
     /**
-     * @param select   jpql语句select部分
-     * @param from     jpql 语句 from到结束部分
-     * @param pageable 分页信息
-     * @param params   参数
-     * @return 分页查询结果
-     * @see EntityRepository#query(String, String, Pageable, String, Object[])
-     */
-    @Deprecated
-    <T> Page<T> query(String select, String from, Pageable pageable, Object... params);
-
-    /**
      * 根据传入的JPQL语句查询数据
      *
      * @param select   select 部分预计
@@ -133,6 +123,7 @@ public interface EntityRepository {
      * @param from     jpql 语句 from部分
      * @param pageable 分页信息
      * @param params   参数
+     * @param <T>      查询结果实体类型
      * @return 分页查询结果
      */
     <T> Page<T> query(String select, String from, Pageable pageable, Map<String, Object> params);
@@ -145,6 +136,7 @@ public interface EntityRepository {
      * @param pageable 分页信息
      * @param params   参数
      * @param alias    排序表别名
+     * @param <T>      查询结果实体类型
      * @return 分页查询结果
      */
     <T> Page<T> query(String select, String from, Pageable pageable, Map<String, Object> params, String alias);

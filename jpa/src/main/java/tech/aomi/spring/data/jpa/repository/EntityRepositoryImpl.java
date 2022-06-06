@@ -194,19 +194,6 @@ public class EntityRepositoryImpl implements EntityRepository {
         return executeQueryOne(query);
     }
 
-    /**
-     * @param select   jpql语句select部分
-     * @param from     jpql 语句 from到结束部分
-     * @param pageable 分页信息
-     * @param params   参数
-     * @param <T>      AbstractEntity
-     * @return 分页查询结果
-     */
-    @Override
-    public <T> Page<T> query(String select, String from, Pageable pageable, Object... params) {
-        return query(select, from, pageable, null, params);
-    }
-
     @Override
     public <T> Page<T> query(String select, String from, Pageable pageable, String alias, Object[] params) {
         String fromSql = from;
