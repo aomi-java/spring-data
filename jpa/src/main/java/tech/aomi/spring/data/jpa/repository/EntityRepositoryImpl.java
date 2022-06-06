@@ -9,7 +9,10 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
+import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
@@ -46,18 +49,18 @@ public class EntityRepositoryImpl implements EntityRepository {
     private final Object notDeletedValue;
 
 
-    @PersistenceContext
     private EntityManager entityManager;
 
-    public EntityRepositoryImpl() {
-        this(false);
+    public EntityRepositoryImpl(EntityManager entityManager) {
+        this(entityManager, false);
     }
 
-    public EntityRepositoryImpl(Boolean enabledSoftDelete) {
-        this(enabledSoftDelete, "deleted", false);
+    public EntityRepositoryImpl(EntityManager entityManager, Boolean enabledSoftDelete) {
+        this(entityManager, enabledSoftDelete, "deleted", false);
     }
 
-    public EntityRepositoryImpl(Boolean enabledSoftDelete, String softDeleteFieldName, Object notDeletedValue) {
+    public EntityRepositoryImpl(EntityManager entityManager, Boolean enabledSoftDelete, String softDeleteFieldName, Object notDeletedValue) {
+        this.entityManager = entityManager;
         this.enabledSoftDelete = enabledSoftDelete;
         this.softDeleteFieldName = softDeleteFieldName;
         this.notDeletedValue = notDeletedValue;
@@ -521,4 +524,7 @@ public class EntityRepositoryImpl implements EntityRepository {
         }
     }
 
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 }
