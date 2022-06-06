@@ -31,7 +31,7 @@ public class MongodbIdRepository implements IdRepository {
         FindAndModifyOptions options = new FindAndModifyOptions();
         options.returnNew(true);
         DBSequence seq = mongoTemplate.findAndModify(
-                new Query(Criteria.where("id").is(sequenceName)),
+                new Query(Criteria.where("sequence").is(sequenceName)),
                 new Update().inc("value", 1L),
                 options,
                 DBSequence.class
@@ -45,12 +45,12 @@ public class MongodbIdRepository implements IdRepository {
 
     private DBSequence save(String sequenceName) {
         DBSequence exists = mongoTemplate.findOne(
-                new Query(Criteria.where("id").is(sequenceName)),
+                new Query(Criteria.where("sequence").is(sequenceName)),
                 DBSequence.class
         );
         if (null == exists) {
             DBSequence sequence = new DBSequence();
-            sequence.setId(sequenceName);
+            sequence.setSequence(sequenceName);
             sequence.setValue(1L);
             return mongoTemplate.insert(sequence);
         }
