@@ -8,19 +8,17 @@ import org.springframework.data.mongodb.core.query.Query;
 import java.util.List;
 
 /**
- * @author Sean(sean.snow @ live.com) createAt 17-12-6.
+ * @author Sean createAt 17-12-6.
  */
 public interface DocumentRepository {
 
-    <T> List<T> findAll(Class<T> documentClass, Query query, Sort sort);
+    <T> List<T> findAll(Query query, Class<T> documentClass);
 
     <T> List<T> findAll(Query query, Sort sort, Class<T> documentClass);
 
     <T> List<T> findAll(Query query, Sort sort, Class<T> resultClass, Class<?> documentClass);
 
     <T> List<T> findAll(Query query, Sort sort, Class<T> resultClass, String collectionName);
-
-    <T> Page<T> findAll(Class<T> documentClass, Query query, Pageable pageable);
 
     /**
      * 分页查询数据

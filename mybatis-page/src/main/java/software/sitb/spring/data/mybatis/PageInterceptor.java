@@ -30,7 +30,7 @@ import java.util.Properties;
 /**
  * mybatis 分页拦截器，结合Spring data Page 和 Pageable 使用
  *
- * @author 田尘殇Sean(sean.snow@live.com) createAt 2016/11/21
+ * @author Sean(sean.snow@live.com) createAt 2016/11/21
  */
 @Intercepts(@Signature(type = Executor.class, method = "query", args = {MappedStatement.class, Object.class, RowBounds.class, ResultHandler.class}))
 public class PageInterceptor implements Interceptor {

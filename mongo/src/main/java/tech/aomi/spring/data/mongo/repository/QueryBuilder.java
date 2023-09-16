@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.regex.Pattern;
 
 /**
- * @author Sean(sean.snow @ live.com) createAt 17-12-13.
+ * @author Sean createAt 17-12-13.
  */
 public class QueryBuilder {
 

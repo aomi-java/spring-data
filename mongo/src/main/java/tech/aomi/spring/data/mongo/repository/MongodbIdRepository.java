@@ -10,7 +10,7 @@ import tech.aomi.spring.data.common.IdRepository;
 
 
 /**
- * @author Sean(sean.snow @ live.com) createAt 17-12-26.
+ * @author Sean createAt 17-12-26.
  */
 public class MongodbIdRepository implements IdRepository {
 

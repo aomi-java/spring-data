@@ -3,7 +3,7 @@ package tech.aomi.spring.data.common.util;
 import org.springframework.data.domain.Sort;
 
 /**
- * @author 田尘殇Sean(sean.snow@live.com) Create At 16/8/1
+ * @author Sean Create At 16/8/1
  */
 public class QueryUtils {
 

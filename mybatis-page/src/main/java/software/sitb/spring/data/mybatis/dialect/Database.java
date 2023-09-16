@@ -1,7 +1,7 @@
 package software.sitb.spring.data.mybatis.dialect;
 
 /**
- * @author 田尘殇Sean(sean.snow@live.com) createAt 2016/11/22
+ * @author Sean(sean.snow@live.com) createAt 2016/11/22
  */
 public enum Database {
     DB2,

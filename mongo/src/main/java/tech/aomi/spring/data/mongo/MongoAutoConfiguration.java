@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author 田尘殇Sean(sean.snow @ live.com) createAt 2018/7/14
+ * @author Sean createAt 2018/7/14
  */
 @Configuration
 @ConditionalOnBean(MongoTemplate.class)

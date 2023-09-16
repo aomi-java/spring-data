@@ -9,7 +9,7 @@ public abstract class Dialect {
      * 返回分页sql，无占位符，limit和 offset 直接写死在sql中
      */
 
-    public abstract String getLimitString(String sql, int offset, int limit);
+    public abstract String getLimitString(String sql, long offset, long limit);
 
     public String getSortSql(Sort sort) {
         if (null == sort) {

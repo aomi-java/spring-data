@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import java.util.List;
 
 /**
- * @author Sean(sean.snow @ live.com) createAt 17-12-6.
+ * @author Sean createAt 17-12-6.
  */
 public class DocumentRepositoryImpl implements DocumentRepository {
 
@@ -21,8 +21,7 @@ public class DocumentRepositoryImpl implements DocumentRepository {
     }
 
     @Override
-    public <T> List<T> findAll(Class<T> documentClass, Query query, Sort sort) {
-        query.with(sort);
+    public <T> List<T> findAll(Query query, Class<T> documentClass) {
         return this.mongoTemplate.find(query, documentClass);
     }
 
@@ -43,7 +42,7 @@ public class DocumentRepositoryImpl implements DocumentRepository {
     }
 
     @Override
-    public <T> Page<T> findAll(Class<T> documentClass, Query query, Pageable pageable) {
+    public <T> Page<T> findAll(Query query, Pageable pageable, Class<T> documentClass) {
         long total = 0;
         boolean noCount = true;
         if (null != pageable) {
@@ -59,10 +58,6 @@ public class DocumentRepositoryImpl implements DocumentRepository {
         return pageable == null ? new PageImpl<>(content) : new PageImpl<>(content, pageable, total);
     }
 
-    @Override
-    public <T> Page<T> findAll(Query query, Pageable pageable, Class<T> documentClass) {
-        return findAll(query, pageable, documentClass, documentClass);
-    }
 
     @Override
     public <T> Page<T> findAll(Query query, Pageable pageable, Class<T> resultClass, Class<?> documentClass) {

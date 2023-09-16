@@ -10,7 +10,7 @@ import java.util.Map;
 /**
  * 公共数据查询仓库
  *
- * @author 田尘殇
+ * @author Sean
  * date 2015/5/22
  * time 13:18
  */

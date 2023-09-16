@@ -16,7 +16,7 @@ public class OracleDialect extends Dialect {
 
 
     @Override
-    public String getLimitString(String sql, int offset, int limit) {
+    public String getLimitString(String sql, long offset, long limit) {
         sql = sql.trim();
 
         // no supports "for update", kill it

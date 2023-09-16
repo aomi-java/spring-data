@@ -7,7 +7,7 @@ public class MySQLDialect extends Dialect {
 
 
     @Override
-    public String getLimitString(String sql, int offset, int limit) {
+    public String getLimitString(String sql, long offset, long limit) {
         if (offset == 0) {
             return String.format(LIMIT_SQL_PATTERN_FIRST, sql, limit);
         }
