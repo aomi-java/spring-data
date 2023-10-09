@@ -6,8 +6,9 @@ import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Field;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.lang.Nullable;
 
-import java.util.Collection;
+import java.util.*;
 import java.util.regex.Pattern;
 
 /**
@@ -15,12 +16,17 @@ import java.util.regex.Pattern;
  */
 public class QueryBuilder {
 
-    private final Query query;
+    private final List<Criteria> criteria = new ArrayList<>();
+    private final List<String> excludes = new ArrayList<>();
+    private final List<String> includes = new ArrayList<>();
+    private Sort sort;
+    private Pageable pageable;
 
-    public final CriteriaBuilder criteria = CriteriaBuilder.instance;
+    private String positionKey;
+    private int positionValue;
 
     private QueryBuilder() {
-        query = new Query();
+//        query = new Query();
     }
 
     public static QueryBuilder builder() {
@@ -28,37 +34,37 @@ public class QueryBuilder {
     }
 
     public QueryBuilder is(String k, Object v) {
-        query.addCriteria(criteria.is(k, v));
+        this.criteria.add(Criteria.where(k).is(v));
         return this;
     }
 
     public QueryBuilder in(String field, Object... v) {
-        query.addCriteria(Criteria.where(field).in(v));
+        this.criteria.add(Criteria.where(field).in(v));
         return this;
     }
 
     public QueryBuilder in(String field, Collection<?> v) {
-        query.addCriteria(Criteria.where(field).in(v));
+        this.criteria.add(Criteria.where(field).in(v));
         return this;
     }
 
     public QueryBuilder nin(String field, Object... v) {
-        query.addCriteria(Criteria.where(field).nin(v));
+        this.criteria.add(Criteria.where(field).nin(v));
         return this;
     }
 
     public QueryBuilder nin(String field, Collection<?> v) {
-        query.addCriteria(Criteria.where(field).nin(v));
+        this.criteria.add(Criteria.where(field).nin(v));
         return this;
     }
 
     public QueryBuilder regex(String field, String regex) {
-        query.addCriteria(Criteria.where(field).regex(regex));
+        this.criteria.add(Criteria.where(field).regex(regex));
         return this;
     }
 
     public QueryBuilder regex(String field, Pattern regex) {
-        query.addCriteria(Criteria.where(field).regex(regex));
+        this.criteria.add(Criteria.where(field).regex(regex));
         return this;
     }
 
@@ -68,109 +74,131 @@ public class QueryBuilder {
     }
 
     public QueryBuilder leftLike(String key, String value) {
-        query.addCriteria(criteria.leftLike(key, value));
+        this.criteria.add(Criteria.where(key).regex(".*" + value));
         return this;
     }
 
     public QueryBuilder rightLike(String key, String value) {
-        query.addCriteria(criteria.rightLike(key, value));
+        this.criteria.add(Criteria.where(key).regex(value + ".*"));
         return this;
     }
 
     public QueryBuilder gt(String field, Object v) {
-        query.addCriteria(Criteria.where(field).gt(v));
+        this.criteria.add(Criteria.where(field).gt(v));
         return this;
     }
 
     public QueryBuilder gte(String field, Object v) {
-        query.addCriteria(Criteria.where(field).gte(v));
+        this.criteria.add(Criteria.where(field).gte(v));
         return this;
     }
 
     public QueryBuilder lt(String field, Object v) {
-        query.addCriteria(Criteria.where(field).lt(v));
+        this.criteria.add(Criteria.where(field).lt(v));
         return this;
     }
 
     public QueryBuilder lte(String field, Object v) {
-        query.addCriteria(Criteria.where(field).lte(v));
+        this.criteria.add(Criteria.where(field).lte(v));
         return this;
     }
 
     public QueryBuilder between(String field, Object v1, Object v2) {
-        query.addCriteria(Criteria.where(field).gte(v1).lte(v2));
+        this.criteria.add(Criteria.where(field).gte(v1).lte(v2));
         return this;
     }
 
     public QueryBuilder or(Criteria... criteria) {
-        query.addCriteria(new Criteria().orOperator(criteria));
+        this.criteria.add(new Criteria().orOperator(criteria));
         return this;
     }
 
     public QueryBuilder and(Criteria... criteria) {
-        query.addCriteria(new Criteria().andOperator(criteria));
+        this.criteria.addAll(Arrays.stream(criteria).toList());
         return this;
     }
 
     public QueryBuilder nor(Criteria... criteria) {
-        query.addCriteria(new Criteria().norOperator(criteria));
+        this.criteria.add(new Criteria().norOperator(criteria));
         return this;
     }
 
     public QueryBuilder not(String field) {
-        query.addCriteria(Criteria.where(field).not());
+        this.criteria.add(Criteria.where(field).not());
         return this;
     }
 
     public QueryBuilder ne(String field, Object o) {
-        query.addCriteria(Criteria.where(field).ne(o));
+        this.criteria.add(Criteria.where(field).ne(o));
         return this;
     }
 
 
     public QueryBuilder exists(String key, boolean exists) {
-        query.addCriteria(Criteria.where(key).exists(exists));
+        this.criteria.add(Criteria.where(key).exists(exists));
         return this;
     }
 
     public QueryBuilder position(String field, int value) {
-        Field f = query.fields();
-        f.position(field, value);
+//        Field f = query.fields();
+//        f.position(field, value);
+        this.positionKey = field;
+        this.positionValue = value;
         return this;
     }
 
     public QueryBuilder exclude(String... keys) {
-        Field f = query.fields();
-        for (String key : keys) {
-            f.exclude(key);
-        }
+        this.excludes.addAll(Arrays.stream(keys).toList());
+//        Field f = query.fields();
+//        for (String key : keys) {
+//            f.exclude(key);
+//        }
         return this;
     }
 
     public QueryBuilder include(String... keys) {
-        Field f = query.fields();
-        for (String key : keys) {
-            f.include(key);
-        }
+        this.includes.addAll(Arrays.stream(keys).toList());
+//        Field f = query.fields();
+//        for (String key : keys) {
+//            f.include(key);
+//        }
         return this;
     }
 
     public QueryBuilder sort(Sort sort) {
-        query.with(sort);
+        this.sort = sort;
+//        query.with(sort);
         return this;
     }
 
     public QueryBuilder page(Pageable pageable) {
-        query.with(pageable);
+        this.pageable = pageable;
+//        query.with(pageable);
         return this;
     }
 
-    public QueryBuilder addCriteria(CriteriaDefinition criteriaDefinition) {
-        query.addCriteria(criteriaDefinition);
-        return this;
-    }
+//    public QueryBuilder addCriteria(CriteriaDefinition criteriaDefinition) {
+//        this.criteria.add(criteriaDefinition);
+//        return this;
+//    }
 
     public Query build() {
+        var query = new Query();
+        criteria.forEach(query::addCriteria);
+        Field f = query.fields();
+        if (null != positionKey) {
+            f.position(positionKey, positionValue);
+        }
+        f.exclude(excludes.toArray(new String[0]));
+        f.include(includes.toArray(new String[0]));
+        if (null != sort) {
+            query.with(sort);
+        }
+        if (null != pageable) {
+            query.with(pageable);
+        }
+
+
         return query;
     }
 
