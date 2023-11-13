@@ -185,6 +185,10 @@ public class QueryBuilder {
 //        return this;
 //    }
 
+    public Criteria buildCriteria() {
+        return new Criteria().andOperator(this.criteria.toArray(new Criteria[0]));
+    }
+
     public Query build() {
         var query = new Query();
         criteria.forEach(query::addCriteria);
