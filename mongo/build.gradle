@@ -1,6 +1,6 @@
 description = 'mongo'
 
-version '1.0.0_7-SNAPSHOT'
+version '1.0.0_8-SNAPSHOT'
 
 apply from: 'https://onegit.com/enterprise/public/raw/master/publish-center.gradle'
 
