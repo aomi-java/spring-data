@@ -1,14 +1,16 @@
 package tech.aomi.spring.data.mongo.repository;
 
+import lombok.Getter;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.CriteriaDefinition;
 import org.springframework.data.mongodb.core.query.Field;
 import org.springframework.data.mongodb.core.query.Query;
-import org.springframework.lang.Nullable;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.regex.Pattern;
 
 /**
@@ -16,6 +18,7 @@ import java.util.regex.Pattern;
  */
 public class QueryBuilder {
 
+    @Getter
     private final List<Criteria> criteria = new ArrayList<>();
     private final List<String> excludes = new ArrayList<>();
     private final List<String> includes = new ArrayList<>();
